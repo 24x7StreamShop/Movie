@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Remarried Empress - Playlist Player</title>
     <style>
         * {
@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
@@ -33,15 +33,16 @@
         }
 
         .header {
-            padding: 20px 25px;
+            padding: 16px 20px;
             background: #1e1e2d;
             border-bottom: 1px solid #2b2b40;
         }
 
         .header h1 {
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 4vw, 1.25rem);
             color: #f0f0f5;
             font-weight: 600;
+            word-break: break-word;
         }
 
         .video-container {
@@ -65,8 +66,8 @@
         }
 
         .playlist-header {
-            padding: 15px 25px;
-            font-size: 0.9rem;
+            padding: 12px 20px;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #8a8aab;
@@ -77,10 +78,11 @@
             list-style: none;
             max-height: 280px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .playlist::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .playlist::-webkit-scrollbar-thumb {
@@ -89,12 +91,13 @@
         }
 
         .playlist li {
-            padding: 16px 25px;
+            padding: 14px 20px;
             border-bottom: 1px solid #1f1f2e;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
             transition: background 0.2s ease;
         }
 
@@ -110,12 +113,17 @@
         .playlist li .track-info {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
+            flex: 1;
+            min-width: 0;
         }
 
         .playlist li .title {
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 3vw, 0.95rem);
             color: #dcdce6;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .playlist li.active .title {
@@ -129,16 +137,45 @@
         }
 
         .playlist li .status-badge {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             background: #2b2b40;
             padding: 4px 10px;
             border-radius: 20px;
             color: #aaa;
+            flex-shrink: 0;
         }
 
         .playlist li.active .status-badge {
             background: #7c5cfc;
             color: #fff;
+        }
+
+        /* Media Queries for smaller screens */
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+                align-items: flex-start;
+            }
+
+            .container {
+                border-radius: 0;
+                border: none;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .video-container {
+                width: 100%;
+            }
+
+            .playlist-section {
+                flex: 1;
+            }
+
+            .playlist {
+                max-height: none;
+            }
         }
     </style>
 </head>
