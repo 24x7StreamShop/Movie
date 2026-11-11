@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Remarried Empress - Playlist Player</title>
+    <title>The Remarried Empress - Download Episodes</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,35 +33,22 @@
         }
 
         .header {
-            padding: 14px 18px;
+            padding: 20px 24px;
             background: #1e1e2d;
             border-bottom: 1px solid #2b2b40;
+            text-align: center;
         }
 
         .header h1 {
-            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            font-size: clamp(1rem, 4vw, 1.35rem);
             color: #f0f0f5;
             font-weight: 600;
-            word-break: break-word;
         }
 
-        /* Fixed 16:9 Responsive Video Wrapper */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            background: #000000;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .header p {
+            font-size: 0.85rem;
+            color: #8a8aab;
+            margin-top: 6px;
         }
 
         .playlist-section {
@@ -69,8 +56,8 @@
         }
 
         .playlist-header {
-            padding: 12px 18px;
-            font-size: 0.8rem;
+            padding: 15px 24px;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #8a8aab;
@@ -79,7 +66,7 @@
 
         .playlist {
             list-style: none;
-            max-height: 280px;
+            max-height: 450px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -94,13 +81,13 @@
         }
 
         .playlist li {
-            padding: 14px 18px;
+            padding: 16px 24px;
             border-bottom: 1px solid #1f1f2e;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 15px;
             transition: background 0.2s ease;
         }
 
@@ -108,30 +95,18 @@
             background: #1f1f2e;
         }
 
-        .playlist li.active {
-            background: #25253d;
-            border-left: 4px solid #7c5cfc;
-        }
-
         .playlist li .track-info {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 4px;
             flex: 1;
             min-width: 0;
         }
 
         .playlist li .title {
-            font-size: clamp(0.85rem, 3vw, 0.95rem);
+            font-size: clamp(0.9rem, 3.2vw, 1rem);
             color: #dcdce6;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .playlist li.active .title {
-            color: #ffffff;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .playlist li .resolution {
@@ -139,18 +114,24 @@
             color: #8a8aab;
         }
 
-        .playlist li .status-badge {
-            font-size: 0.7rem;
-            background: #2b2b40;
-            padding: 4px 10px;
-            border-radius: 20px;
-            color: #aaa;
+        .download-badge {
+            font-size: 0.8rem;
+            background: #7c5cfc;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
             flex-shrink: 0;
         }
 
-        .playlist li.active .status-badge {
-            background: #7c5cfc;
-            color: #fff;
+        .download-badge:hover {
+            background: #6a4ce0;
         }
 
         /* Strict Mobile Adjustments */
@@ -168,17 +149,13 @@
                 flex-direction: column;
             }
 
-            .video-container {
-                max-height: 40vh;
-                padding-top: 56.25%;
-            }
-
-            .playlist-section {
+            .playlist {
+                max-height: none;
                 flex: 1;
             }
 
-            .playlist {
-                max-height: calc(100vh - 40vh - 100px);
+            .playlist li {
+                padding: 14px 16px;
             }
         }
     </style>
@@ -187,15 +164,12 @@
 
     <div class="container">
         <div class="header">
-            <h1 id="current-title">Loading Playlist...</h1>
-        </div>
-
-        <div class="video-container">
-            <iframe id="video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <h1>The Remarried Empress</h1>
+            <p>Hindi Fan Dubbed Series — Tap an episode to download</p>
         </div>
 
         <div class="playlist-section">
-            <div class="playlist-header">Episodes Playlist</div>
+            <div class="playlist-header">Available Episodes</div>
             <ul class="playlist" id="playlist"></ul>
         </div>
     </div>
@@ -205,57 +179,40 @@
             {
                 title: "The Remarried Empress Hindi Fan Dubbed S01E01",
                 resolution: "1080p",
-                src: "https://drive.google.com/file/d/1W71XKH48n_MphepQ5SL0EtnQDtUZH-50/preview"
+                src: "https://drive.google.com/uc?export=download&id=1W71XKH48n_MphepQ5SL0EtnQDtUZH-50"
             },
             {
                 title: "The Remarried Empress Hindi Fan Dubbed S01E02",
                 resolution: "1080p",
-                src: "https://drive.google.com/file/d/1WGtwiIi81qiAO_btQkHrHbrVQlCwkLQr/preview"
+                src: "https://drive.google.com/uc?export=download&id=1WGtwiIi81qiAO_btQkHrHbrVQlCwkLQr"
             },
             {
                 title: "The Remarried Empress Hindi Fan Dubbed S01E03",
                 resolution: "480p",
-                src: "https://drive.google.com/file/d/1mSR18Qs362a5zmbyBEYhmkg7Md4yxjTi/preview"
+                src: "https://drive.google.com/uc?export=download&id=1mSR18Qs362a5zmbyBEYhmkg7Md4yxjTi"
             },
             {
                 title: "The Remarried Empress Hindi Fan Dubbed S01E04",
                 resolution: "1080p",
-                src: "https://drive.google.com/file/d/1LnKXvCuRj7Rkw_sMrB-CvExPnprh1W_r/preview"
+                src: "https://drive.google.com/uc?export=download&id=1LnKXvCuRj7Rkw_sMrB-CvExPnprh1W_r"
             }
         ];
 
-        const iframe = document.getElementById('video-iframe');
         const playlistUI = document.getElementById('playlist');
-        const currentTitleUI = document.getElementById('current-title');
 
-        function loadEpisode(index) {
-            const episode = episodes[index];
-            iframe.src = episode.src;
-            currentTitleUI.textContent = `${episode.title} [${episode.resolution}]`;
-
-            document.querySelectorAll('#playlist li').forEach((li, i) => {
-                li.classList.toggle('active', i === index);
-                const badge = li.querySelector('.status-badge');
-                badge.textContent = i === index ? 'Playing' : 'Play';
-            });
-        }
-
-        episodes.forEach((episode, index) => {
+        episodes.forEach((episode) => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <div class="track-info">
                     <span class="title">${episode.title}</span>
                     <span class="resolution">${episode.resolution}</span>
                 </div>
-                <span class="status-badge">Play</span>
+                <a href="${episode.src}" class="download-badge" download>
+                    Download
+                </a>
             `;
-            li.addEventListener('click', () => loadEpisode(index));
             playlistUI.appendChild(li);
         });
-
-        if (episodes.length > 0) {
-            loadEpisode(0);
-        }
     </script>
 </body>
 </html>
