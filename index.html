@@ -33,23 +33,26 @@
         }
 
         .header {
-            padding: 16px 20px;
+            padding: 14px 18px;
             background: #1e1e2d;
             border-bottom: 1px solid #2b2b40;
         }
 
         .header h1 {
-            font-size: clamp(1rem, 4vw, 1.25rem);
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
             color: #f0f0f5;
             font-weight: 600;
             word-break: break-word;
         }
 
+        /* Fixed 16:9 Responsive Video Wrapper */
         .video-container {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
             background: #000000;
+            overflow: hidden;
         }
 
         .video-container iframe {
@@ -66,8 +69,8 @@
         }
 
         .playlist-header {
-            padding: 12px 20px;
-            font-size: 0.85rem;
+            padding: 12px 18px;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #8a8aab;
@@ -91,7 +94,7 @@
         }
 
         .playlist li {
-            padding: 14px 20px;
+            padding: 14px 18px;
             border-bottom: 1px solid #1f1f2e;
             cursor: pointer;
             display: flex;
@@ -150,8 +153,8 @@
             color: #fff;
         }
 
-        /* Media Queries for smaller screens */
-        @media (max-width: 480px) {
+        /* Strict Mobile Adjustments */
+        @media (max-width: 600px) {
             body {
                 padding: 0;
                 align-items: flex-start;
@@ -166,7 +169,8 @@
             }
 
             .video-container {
-                width: 100%;
+                max-height: 40vh;
+                padding-top: 56.25%;
             }
 
             .playlist-section {
@@ -174,7 +178,7 @@
             }
 
             .playlist {
-                max-height: none;
+                max-height: calc(100vh - 40vh - 100px);
             }
         }
     </style>
